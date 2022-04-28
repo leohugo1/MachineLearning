@@ -3,38 +3,6 @@ import numpy as np
 
 
 
-
-class l1:
-    def __init__(self,alfa):
-        self.alfa=alfa
-    def __call__(self,w):
-        return self.alfa * np.linalg.norm(w)
-    def grad(self,w):
-        return self.alfa * np.sign(w)
-
-class l2:
-    def __init__(self,alfa):
-        self.alfa=alfa
-
-    def __call__(self,w):
-        return self.alfa * 0.5 * w.T.dot(w)
-    def grad(self,w):
-        return self.alfa * w
-
-class l1_l2:
-    def __init__(self,alfa,l1_ratio=0.5):
-        self.alfa=alfa
-        self.l1_ratio=l1_ratio
-
-    def __call__(self,w):
-        l1=self.l1_ratio * np.linalg.norm(w)
-        l2=(1 - self.l1_ratio) * 0.5 * w.T.dot(w)
-        return self.alfa * (l1 + l2)
-    def grad(self,w):
-        l1=self.l1_ratio * np.sign(w)
-        l2=(1 - self.l1_ratio) * w
-        return self.alfa * (l1 + l2)
-
 class regressao(object):
     def __init__(self,iteracoes,taxa_aprendizado):
         self.iteracoes=iteracoes
